@@ -41,6 +41,6 @@ for ip,username,password,name in credentials:
         fp.write(output)
         fp.close()
 
-    print output
+#    print output
 
     remote_conn.close()
