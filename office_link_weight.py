@@ -22,7 +22,7 @@ def modify_isproute_weight(isp,weights):
     try:
         remote_conn_pre=paramiko.SSHClient()
         remote_conn_pre.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-        remote_conn_pre.connect('172.25.0.246',username='pythonconfig',password='3@8&2uswoBaWrlV&&8gi',look_for_keys=False,port=32200)
+        remote_conn_pre.connect('1.1.1.1',username='username',password='password',look_for_keys=False,port=32200)
         remote_conn = remote_conn_pre.invoke_shell()
         time.sleep(1)
         remote_conn.send('config\n')
@@ -30,15 +30,15 @@ def modify_isproute_weight(isp,weights):
         remote_conn.send('ip vrouter trust-vr\n')
         time.sleep(1)
         if isp=='asd':
-            exec_command = 'ip route "ChinaIP" 122.13.132.161 weight '+str(weights)+'\n'
+            exec_command = 'ip route "ChinaIP" 2.2.2.2 weight '+str(weights)+'\n'
             print exec_command
             remote_conn.send(exec_command)
         elif isp=='szvpn':
-            exec_command = 'ip route 0.0.0.0/0 172.27.255.38 weight '+str(weights)+'\n'
+            exec_command = 'ip route 0.0.0.0/0 3.3.3.3 weight '+str(weights)+'\n'
             print exec_command
             remote_conn.send(exec_command)
         elif isp=='cu':
-            exec_command = 'ip route "ChinaIP" 58.248.229.129 weight '+str(weights)+'\n'
+            exec_command = 'ip route "ChinaIP" 4.4.4.4 weight '+str(weights)+'\n'
             print exec_command
             remote_conn.send(exec_command)
         remote_conn.close()
@@ -51,15 +51,15 @@ def get_isproute_weight(isp):
     if not isp in isps:
         return False
     if isp == 'asd':
-        gw_ip = re.compile(r'.*122.13.132.161.*')
+        gw_ip = re.compile(r'.*2.2.2.2.*')
     elif isp == 'szvpn':
-        gw_ip = re.compile(r'.*172.27.255.38.*')
+        gw_ip = re.compile(r'.*3.3.3.3.*')
     elif isp == 'cu':
-        gw_ip = re.compile(r'.*58.248.229.129.*')
+        gw_ip = re.compile(r'.*4.4.4.4.*')
     try:
         remote_conn_pre=paramiko.SSHClient()
         remote_conn_pre.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-        remote_conn_pre.connect('172.25.0.246',username='pythonconfig',password='3@8&2uswoBaWrlV&&8gi',look_for_keys=False,port=32200)
+        remote_conn_pre.connect('1.1.1.1',username='username',password='password',look_for_keys=False,port=32200)
         remote_conn = remote_conn_pre.invoke_shell()
         time.sleep(1)
         if isp == 'asd' or isp == 'cu':
